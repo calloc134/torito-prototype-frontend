@@ -5,7 +5,9 @@ import {
   useCallback,
   Suspense,
 } from "react";
-import "./App.css";
+
+import { Textarea } from "./components/ui/textarea";
+import { Button } from "./components/ui/button";
 
 const serverDataContext = createContext<ServerDataContextType>({
   data: {
@@ -71,9 +73,42 @@ const Child = () => {
   const { data } = useContext(serverDataContext);
 
   return (
-    <div>
-      <h1>Child</h1>
-      <p>{data.others}</p>
+    <div className="flex w-full h-screen p-4">
+      <div className="flex flex-row w-full h-full gap-4">
+        <div className="flex flex-col w-1/2">
+          <div className="flex flex-col h-1/2 gap-2">
+            <h1>Bridge</h1>
+            <Textarea
+              value={data.BridgeText}
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+              className="h-full"
+            ></Textarea>
+          </div>
+          <div className="flex flex-col h-1/2 gap-2">
+            <h1>Proxy</h1>
+            <Textarea
+              value={data.ProxyText}
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+              className="h-full"
+            ></Textarea>
+          </div>
+        </div>
+        <div className="flex flex-col w-1/2 gap-2">
+          <h1>Server Log</h1>
+          <Textarea className="h-full" readOnly></Textarea>
+          <Button
+            onClick={() => {
+              console.log("click");
+            }}
+          >
+            Save
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
