@@ -70,10 +70,6 @@ const fetchData = () => {
 const Child = () => {
   const context = useContext(serverDataContext);
 
-  if (!context) {
-    throw new Error("data is undefined");
-  }
-
   const { data } = context;
 
   return (
