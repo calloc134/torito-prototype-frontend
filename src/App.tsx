@@ -23,6 +23,9 @@ const serverDataContext = createContext<ServerDataContextType>({
     others: [],
   },
   mutationData: async () => {},
+  updateUseDefaultBridges: () => {},
+  updateBridgeText: () => {},
+  updateProxyText: () => {},
 });
 
 type ServerData = {
@@ -37,6 +40,9 @@ type ServerData = {
 type ServerDataContextType = {
   data: ServerData;
   mutationData: () => Promise<void>;
+  updateUseDefaultBridges: (value: boolean) => void;
+  updateBridgeText: (value: string) => void;
+  updateProxyText: (value: string) => void;
 };
 
 // useFetchDataで一時的にキャッシュとして利用するデータ
@@ -59,12 +65,10 @@ const fetchData = () => {
     throw new Promise((resolve, reject) => {
       fetchData("https://webhook.site/f47d9738-c2e9-4360-a139-dba3ba0ff18e")
         .then((data) => {
-          console.debug("fetch data", data);
           dataCache = data;
           resolve(data);
         })
         .catch((error) => {
-          console.error("fetch error", error);
           reject(error);
         });
     });
@@ -74,7 +78,8 @@ const fetchData = () => {
 };
 
 const Child = () => {
-  const { data } = useContext(serverDataContext);
+  const { data, updateUseDefaultBridges, updateBridgeText, updateProxyText } =
+    useContext(serverDataContext);
 
   return (
     <div className="flex flex-row w-full h-full gap-4 p-2">
@@ -82,14 +87,18 @@ const Child = () => {
         <div className="flex flex-col h-1/2 gap-2">
           <h1>Bridge</h1>
           <div className="flex flex-row gap-2  items-center">
-            <Checkbox />
-            <p>Use Default Bridges</p>
+            <Checkbox
+              checked={data.useDefaultBridges}
+              onCheckedChange={() => {
+                updateUseDefaultBridges(!data.useDefaultBridges);
+              }}
+            />
           </div>
 
           <Textarea
             value={data.BridgeText}
             onChange={(e) => {
-              console.log(e.target.value);
+              updateBridgeText(e.target.value);
             }}
             className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-600"
           ></Textarea>
@@ -99,7 +108,7 @@ const Child = () => {
           <Textarea
             value={data.ProxyText}
             onChange={(e) => {
-              console.log(e.target.value);
+              updateProxyText(e.target.value);
             }}
             className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-900"
           ></Textarea>
@@ -161,8 +170,28 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
     setData(data);
   }, [data]);
 
+  const updateUseDefaultBridges = (value: boolean) => {
+    setData({ ...data, useDefaultBridges: value });
+  };
+
+  const updateBridgeText = (value: string) => {
+    setData({ ...data, BridgeText: value });
+  };
+
+  const updateProxyText = (value: string) => {
+    setData({ ...data, ProxyText: value });
+  };
+
   return (
-    <serverDataContext.Provider value={{ data, mutationData }}>
+    <serverDataContext.Provider
+      value={{
+        data,
+        mutationData,
+        updateUseDefaultBridges,
+        updateBridgeText,
+        updateProxyText,
+      }}
+    >
       {children}
     </serverDataContext.Provider>
   );
