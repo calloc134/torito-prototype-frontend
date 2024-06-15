@@ -128,6 +128,12 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const loading = (
+  <div className="flex justify-center items-center h-screen">
+    <h1>Loading...</h1>
+  </div>
+);
+
 function App() {
   return (
     <>
