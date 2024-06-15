@@ -179,7 +179,7 @@ function App() {
   return (
     <>
       <div className="flex justify-center items-center h-screen w-full dark bg-gray-900 ">
-        <AuroraBackground className="flex flex-col gap-8 p-4 w-full h-full">
+        <AuroraBackground className="flex flex-col gap-8 w-full h-full">
           <div className="flex h-screen w-screen justify-center items-center">
             <Suspense fallback={loading}>
               <ServerDataPovider>
