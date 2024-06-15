@@ -137,7 +137,7 @@ const loading = (
 function App() {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={loading}>
         <ServerDataPovider>
           <Child />
         </ServerDataPovider>
