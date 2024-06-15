@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Zen Kaku Gothic New", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
