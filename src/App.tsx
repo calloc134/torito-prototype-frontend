@@ -7,7 +7,11 @@ import {
 } from "react";
 
 import { Textarea } from "./components/ui/textarea";
+// import { Button } from "./components/ui/button";
+import { Checkbox } from "./components/ui/checkbox";
 import { Button } from "./components/ui/button";
+import { RotateLoader } from "react-spinners";
+import { AuroraBackground } from "./components/ui/aurora-background";
 
 const serverDataContext = createContext<ServerDataContextType>({
   data: {
@@ -53,7 +57,7 @@ const fetchData = () => {
   // promiseをthrow
   if (!dataCache) {
     throw new Promise((resolve, reject) => {
-      fetchData("https://webhook.site/4f5f0dcb-2ae4-47d1-8f99-156bcdb40a97")
+      fetchData("https://webhook.site/f47d9738-c2e9-4360-a139-dba3ba0ff18e")
         .then((data) => {
           console.debug("fetch data", data);
           dataCache = data;
@@ -73,41 +77,48 @@ const Child = () => {
   const { data } = useContext(serverDataContext);
 
   return (
-    <div className="flex w-full h-screen p-4">
-      <div className="flex flex-row w-full h-full gap-4">
-        <div className="flex flex-col w-1/2">
-          <div className="flex flex-col h-1/2 gap-2">
-            <h1>Bridge</h1>
-            <Textarea
-              value={data.BridgeText}
-              onChange={(e) => {
-                console.log(e.target.value);
-              }}
-              className="h-full"
-            ></Textarea>
+    <div className="flex flex-row w-full h-full gap-4 p-2">
+      <div className="flex flex-col w-1/2 gap-4">
+        <div className="flex flex-col h-1/2 gap-2">
+          <h1>Bridge</h1>
+          <div className="flex flex-row gap-2  items-center">
+            <Checkbox />
+            <p>Use Default Bridges</p>
           </div>
-          <div className="flex flex-col h-1/2 gap-2">
-            <h1>Proxy</h1>
-            <Textarea
-              value={data.ProxyText}
-              onChange={(e) => {
-                console.log(e.target.value);
-              }}
-              className="h-full"
-            ></Textarea>
-          </div>
-        </div>
-        <div className="flex flex-col w-1/2 gap-2">
-          <h1>Server Log</h1>
-          <Textarea className="h-full" readOnly></Textarea>
-          <Button
-            onClick={() => {
-              console.log("click");
+
+          <Textarea
+            value={data.BridgeText}
+            onChange={(e) => {
+              console.log(e.target.value);
             }}
-          >
-            Save
-          </Button>
+            className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-600"
+          ></Textarea>
         </div>
+        <div className="flex flex-col h-1/2 gap-2">
+          <h1>Proxy</h1>
+          <Textarea
+            value={data.ProxyText}
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+            className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-900"
+          ></Textarea>
+        </div>
+      </div>
+      <div className="flex flex-col w-1/2 gap-2">
+        <h1>Server Log</h1>
+        <Textarea
+          readOnly
+          className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-900"
+        ></Textarea>
+        <Button
+          onClick={() => {
+            console.log("clicked");
+          }}
+          variant="secondary"
+        >
+          Save
+        </Button>
       </div>
     </div>
   );
@@ -158,19 +169,26 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const loading = (
-  <div className="flex justify-center items-center h-screen">
-    <h1>Loading...</h1>
+  <div className="flex flex-col items-center justify-center gap-4 p-16 rounded-2xl bg-white dark:bg-gray-800 shadow-lg">
+    <p className="text-2xl font-bold">Loading...</p>
+    <RotateLoader color="#2563EB" loading={true} size={15} />
   </div>
 );
 
 function App() {
   return (
     <>
-      <Suspense fallback={loading}>
-        <ServerDataPovider>
-          <Child />
-        </ServerDataPovider>
-      </Suspense>
+      <div className="flex justify-center items-center h-screen w-full dark bg-gray-900 ">
+        <AuroraBackground className="flex flex-col gap-8 p-4 w-full h-full">
+          <div className="flex h-screen w-screen justify-center items-center">
+            <Suspense fallback={loading}>
+              <ServerDataPovider>
+                <Child />
+              </ServerDataPovider>
+            </Suspense>
+          </div>
+        </AuroraBackground>
+      </div>
     </>
   );
 }
