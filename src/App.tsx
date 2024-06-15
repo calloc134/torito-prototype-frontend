@@ -88,7 +88,7 @@ const Child = () => {
 
   return (
     <div className="flex flex-row w-full h-full gap-4 p-2">
-      <div className="flex flex-col w-1/2 gap-4">
+      <div className="flex flex-col w-1/2 gap-2">
         <div className="flex flex-col h-1/2 gap-2">
           <h1>Bridge</h1>
           <div className="flex flex-row gap-2  items-center">
