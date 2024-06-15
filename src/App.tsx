@@ -68,9 +68,7 @@ const fetchData = () => {
 };
 
 const Child = () => {
-  const context = useContext(serverDataContext);
-
-  const { data } = context;
+  const { data } = useContext(serverDataContext);
 
   return (
     <div>
