@@ -78,8 +78,13 @@ const fetchData = () => {
 };
 
 const Child = () => {
-  const { data, updateUseDefaultBridges, updateBridgeText, updateProxyText } =
-    useContext(serverDataContext);
+  const {
+    data,
+    updateUseDefaultBridges,
+    updateBridgeText,
+    updateProxyText,
+    mutationData,
+  } = useContext(serverDataContext);
 
   return (
     <div className="flex flex-row w-full h-full gap-4 p-2">
@@ -122,7 +127,7 @@ const Child = () => {
         ></Textarea>
         <Button
           onClick={() => {
-            console.log("clicked");
+            mutationData();
           }}
           variant="secondary"
         >
@@ -159,7 +164,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const resultData = await mutationData(
-      "https://webhook.site/4f5f0dcb-2ae4-47d1-8f99-156bcdb40a97",
+      "https://webhook.site/f47d9738-c2e9-4360-a139-dba3ba0ff18e",
       data
     );
 
@@ -167,7 +172,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
       throw new Error("fetch error");
     }
 
-    setData(data);
+    // TODO: 実装する
   }, [data]);
 
   const updateUseDefaultBridges = (value: boolean) => {
