@@ -51,7 +51,7 @@ const fetchData = () => {
   // promiseをthrow
   if (!dataCache) {
     throw new Promise((resolve, reject) => {
-      fetchData("https://webhook.site/332a910b-befe-48ae-a1f7-2ced04af702d")
+      fetchData("https://webhook.site/4f5f0dcb-2ae4-47d1-8f99-156bcdb40a97")
         .then((data) => {
           console.debug("fetch data", data);
           dataCache = data;
@@ -110,7 +110,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const resultData = await mutationData(
-      "https://webhook.site/332a910b-befe-48ae-a1f7-2ced04af702d",
+      "https://webhook.site/4f5f0dcb-2ae4-47d1-8f99-156bcdb40a97",
       data
     );
 
