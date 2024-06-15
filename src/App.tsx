@@ -81,7 +81,7 @@ const Child = () => {
 type result = "success" | "error";
 
 const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<ServerData>(fetchData());
+  const [data, setData] = useState(fetchData());
 
   const mutationData = useCallback(async () => {
     const mutationData = async (
