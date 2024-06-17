@@ -121,6 +121,7 @@ const Child = () => {
       </div>
       <div className="flex flex-col w-1/2 gap-2">
         <h1>Server Log</h1>
+        <div className="py-3" />
         <Textarea
           readOnly
           className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-900"
