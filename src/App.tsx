@@ -63,7 +63,7 @@ const fetchData = () => {
   // promiseをthrow
   if (!dataCache) {
     throw new Promise((resolve, reject) => {
-      fetchData("https://webhook.site/f47d9738-c2e9-4360-a139-dba3ba0ff18e")
+      fetchData("https://webhook.site/d7ff473a-0a1c-4267-954c-cab01c07398a")
         .then((data) => {
           dataCache = data;
           resolve(data);
@@ -98,6 +98,7 @@ const Child = () => {
                 updateUseDefaultBridges(!data.useDefaultBridges);
               }}
             />
+            <p>Use Default Bridges</p>
           </div>
 
           <Textarea
@@ -165,7 +166,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const resultData = await mutationData(
-      "https://webhook.site/f47d9738-c2e9-4360-a139-dba3ba0ff18e",
+      "https://webhook.site/d7ff473a-0a1c-4267-954c-cab01c07398a",
       data
     );
 
