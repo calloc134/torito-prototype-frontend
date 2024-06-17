@@ -140,7 +140,10 @@ const Child = () => {
   );
 };
 
-type result = "success" | "error";
+enum Result {
+  Success,
+  Error,
+}
 
 const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState(fetchData());
@@ -149,7 +152,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
     const mutationData = async (
       url: string,
       data: ServerData
-    ): Promise<result> => {
+    ): Promise<Result> => {
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -159,10 +162,10 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (!response.ok) {
-        return "error";
+        return Result.Error;
       }
 
-      return "success";
+      return Result.Success;
     };
 
     const resultData = await mutationData(
@@ -170,7 +173,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
       data
     );
 
-    if (resultData === "error") {
+    if (resultData === Result.Error) {
       throw new Error("fetch error");
     }
 
