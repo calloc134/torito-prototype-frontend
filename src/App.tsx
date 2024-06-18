@@ -12,6 +12,7 @@ import { Checkbox } from "./components/ui/checkbox";
 import { Button } from "./components/ui/button";
 import { RotateLoader } from "react-spinners";
 import { AuroraBackground } from "./components/ui/aurora-background";
+import toast, { Toaster } from "react-hot-toast";
 
 const serverDataContext = createContext<ServerDataContextType>({
   data: {
@@ -225,6 +226,7 @@ function App() {
             </Suspense>
           </div>
         </AuroraBackground>
+        <Toaster />
       </div>
     </>
   );
