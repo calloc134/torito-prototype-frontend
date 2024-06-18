@@ -163,13 +163,38 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
         return Result.Error;
       }
 
+      // SSEを使ってサーバーからのログを受け取る
+      const reader = response.body?.getReader();
+
+      if (!reader) {
+        return Result.Error;
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        const text = new TextDecoder().decode(value);
+        console.log(text);
+        toast.success(text, {
+          duration: 2000,
+          position: "bottom-right",
+        });
+      }
+
       return Result.Success;
     };
 
     const resultData = await mutationData("http://localhost:3001/torrc", data);
 
     if (resultData === Result.Error) {
-      throw new Error("fetch error");
+      toast.error("Error: Failed to save data", {
+        duration: 2000,
+        position: "bottom-right",
+      });
     }
 
     // TODO: 実装する
