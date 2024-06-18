@@ -19,7 +19,6 @@ const serverDataContext = createContext<ServerDataContextType>({
     useDefaultBridges: false,
     BridgeText: "dummy",
     ProxyText: "dummy",
-    backUpPath: "dummy",
     others: [],
   },
   mutationData: async () => {},
@@ -33,7 +32,6 @@ type ServerData = {
   useDefaultBridges: boolean;
   BridgeText: string;
   ProxyText: string;
-  backUpPath: string;
   others: Array<string>;
 };
 
