@@ -61,7 +61,7 @@ const fetchData = () => {
   // promiseをthrow
   if (!dataCache) {
     throw new Promise((resolve, reject) => {
-      fetchData("https://webhook.site/d7ff473a-0a1c-4267-954c-cab01c07398a")
+      fetchData("http://localhost:3001/torrc")
         .then((data) => {
           dataCache = data;
           resolve(data);
@@ -166,10 +166,7 @@ const ServerDataPovider = ({ children }: { children: React.ReactNode }) => {
       return Result.Success;
     };
 
-    const resultData = await mutationData(
-      "https://webhook.site/d7ff473a-0a1c-4267-954c-cab01c07398a",
-      data
-    );
+    const resultData = await mutationData("http://localhost:3001/torrc", data);
 
     if (resultData === Result.Error) {
       throw new Error("fetch error");
