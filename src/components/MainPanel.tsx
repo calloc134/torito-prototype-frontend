@@ -80,7 +80,9 @@ export const MainPanel = () => {
             );
 
             if (result.isErr()) {
-              toast.error("Failed to connect to Tor network.");
+              toast.error(
+                `Failed to connect to Tor network: ${result.error.message}`
+              );
               return;
             }
 
