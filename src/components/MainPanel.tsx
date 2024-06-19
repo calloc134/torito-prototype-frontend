@@ -90,7 +90,7 @@ export const MainPanel = () => {
           }}
           variant="secondary"
         >
-          Save
+          Connect to Tor Network
         </Button>
       </div>
     </div>
