@@ -43,6 +43,19 @@ export const mutationData = async (
         break;
       }
 
+      // もしerror: から始まる文字列が来たらエラーとして扱う
+      if (
+        value[0] === 101 &&
+        value[1] === 114 &&
+        value[2] === 114 &&
+        value[3] === 111 &&
+        value[4] === 114 &&
+        value[5] === 58
+      ) {
+        const text = new TextDecoder().decode(value);
+        return err(new Error(text));
+      }
+
       const text = new TextDecoder().decode(value);
       // サーバのメッセージの形式は以下の通り
       // {message}: {percent}%
