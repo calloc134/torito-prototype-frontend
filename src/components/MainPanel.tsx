@@ -39,6 +39,7 @@ export const MainPanel = () => {
             onChange={(e) => {
               updateBridgeText(e.target.value);
             }}
+            disabled={data.useDefaultBridges}
             className="h-full opacity-80 bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl text-indigo-600"
           ></Textarea>
         </div>
